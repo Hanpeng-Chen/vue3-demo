@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -7,6 +8,12 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'dist')
+  },
+  devServer: {
+    port: 3000,
+    hot: true,
+    open: true,
+    contentBase: './dist'
   },
   module: {
     rules: [
@@ -52,6 +59,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html',
